@@ -11,7 +11,7 @@ def sig(sym):
     try:
         d=yf.download(sym,period="1mo",interval="1d",auto_adjust=True,progress=False,threads=False);c=d["Close"].dropna()
         c=d["Close"].dropna()
-　　　　　if len(c)<5:return 0,"--"
+　　　　　 if len(c)<5:return 0,"--"
         r=(float(c.iloc[-1])/float(c.iloc[-2])-1)*100
         return max(-2,min(2,r*1.2)),f"{r:+.1f}%"
     except:return 0,"--"
