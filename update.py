@@ -21,7 +21,7 @@ def main():
     rows=[]
     for code,name in TICKERS.items():
         d=dl(code)
-        if d.empty or len(d)<
+        if d.empty or len(d)<21:return
         c=d["Close"].dropna()
         c=c.iloc[:,0] if hasattr(c,"columns") else c
         r5=(p/p5-1)*100;ma5=float(c.tail(5).mean());ma20=float(c.tail(20).mean());vr=float(v.tail(5).mean()/v.tail(20).mean()) if float(v.tail(20).mean())else 1
