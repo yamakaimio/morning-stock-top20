@@ -23,7 +23,7 @@ def main():
         d=dl(code)
         if d.empty or len(d)<25:continue
         c=d["Close"].dropna();v=d["Volume"].dropna();p=float(c.iloc[-1]);p1=float(c.iloc[-2]);p5=float(c.iloc[-6]);p20=float(c.iloc[-21])
-        r5=(p/p5-1)*100;ma5=float(c.tail(5).mean());ma20=float(c.tail(20).mean());vr=float(v.tail(5).mean()/v.tail(20).mean()) if float(v.tail(20).mean()) else 1
+        r5=(p/p5-1)*100;ma5=float(c.tail(5).mean());ma20=float(c.tail(20).mean());vr=float(v.tail(5).mean()/v.tail(20).mean()) if float(v.tail(20).mean())else 1
         trend=1 if p>ma5>ma20 else (0.5 if p>ma20 else 0)
         mom=max(0,min(1,(r5+5)/15));vol=max(0,min(1,(vr-.8)/1.7));mk=max(0,min(1,(us+2)/4));sb=max(0,min(1,(sox+2)/4))
         score=100*(.30*trend+.28*mom+.18*vol+.14*mk+.10*sb)
@@ -32,7 +32,7 @@ def main():
         if trend>=1:rs.append("5日線＞20日線")
         elif p>ma20:rs.append("20日線を上回る")
         if r5>2:rs.append(f"5日騰落率 {r5:+.1f}%")
-        if vr>1.2:rs.append(f"出来高増加 {vr:.1f}倍")
+        if vr>1.2:rs.append(f"出来高増加{vr:.1f}倍")
         if us>.35:rs.append("米国株が追い風")
         if sox>.5 and code in {"8035","6857","6920","6146","7735","6723","4063","6981","6976","6762"}:rs.append("半導体地合いが追い風")
         if not rs:rs.append("複数のテクニカル条件が改善")
