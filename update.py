@@ -38,6 +38,6 @@ def main():
         if not rs:rs.append("複数のテクニカル条件が改善")
         rows.append({"code":code,"name":name,"price":round(p,1),"score":round(score,1),"signal":"監視候補","reason":"、".join(rs)})
     rows=sorted(rows,key=lambda x:x["score"],reverse=True)[:20]
-    out={"asof_jst":datetime.now(JST).strftime("%Y-%m-%d %H:%M JST"),"market_summary":f"S&P500 {spt} / Nasdaq {ndt} / Dow {djt} / SOX {soxt}","us_signal":"追い風" if us>.35 else ("向かい風" if us<-.35 else "中立"),"jp_signal":"前日終値ベース","semi_signal":"強い" if sox>.5 else ("弱い" if sox<-.5 else "中立"),"stocks":rows}
+    out={"asof_jst":datetime.now(JST).strftime("%Y-%m-%d %H:%M JST"),"market_summary":f"S&P500{spt}/Nasdaq{ndt}/Dow{djt}/SOX{soxt}","us_signal":"追い風" if us>.35 else ("向かい風" if us<-.35 else "中立"),"jp_signal":"前日終値ベース","semi_signal":"強い" if sox>.5 else ("弱い" if sox<-.5 else "中立"),"stocks":rows}
     json.dump(out,open("data.json","w",encoding="utf-8"),ensure_ascii=False,indent=2)
 if __name__=="__main__":main()
