@@ -21,8 +21,9 @@ def main():
     rows=[]
     for code,name in TICKERS.items():
         d=dl(code)
-        if d.empty or len(d)<25:continue
-        c=d["Close"].dropna();v=d["Volume"].dropna();p=float(c.iloc[-1]);p1=float(c.iloc[-2]);p5=float(c.iloc[-6]);p20=float(c.iloc[-21])
+        if d.empty or len(d)<
+        c=d["Close"].dropna()
+        c=c.iloc[:,0] if hasattr(c,"columns") else c
         r5=(p/p5-1)*100;ma5=float(c.tail(5).mean());ma20=float(c.tail(20).mean());vr=float(v.tail(5).mean()/v.tail(20).mean()) if float(v.tail(20).mean())else 1
         trend=1 if p>ma5>ma20 else (0.5 if p>ma20 else 0)
         mom=max(0,min(1,(r5+5)/15));vol=max(0,min(1,(vr-.8)/1.7));mk=max(0,min(1,(us+2)/4));sb=max(0,min(1,(sox+2)/4))
